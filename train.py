@@ -3,7 +3,7 @@ training script for the feedforward neural network
 supports both standalone runs and wandb sweeps
 
 usage:
-    python train.py --epochs 10 --optimizer adam --hidden_size 128
+    python train.py --epochs 20 --optimizer adam --hidden_size 128
     
 for sweeps:
     wandb sweep sweep.yaml
@@ -27,7 +27,7 @@ def train(config=None):
     with wandb.init(config=config):
         cfg = wandb.config
         
-        epochs = cfg.get('epochs', 10)
+        epochs = cfg.get('epochs', 20)  # bumped from 10 after sweep analysis
         num_layers = cfg.get('num_layers', 3)
         hidden_size = cfg.get('hidden_size', 128)
         weight_decay = cfg.get('weight_decay', 0)
@@ -114,7 +114,7 @@ def train(config=None):
 
 def main():
     parser = argparse.ArgumentParser(description='train feedforward nn')
-    parser.add_argument('-e', '--epochs', type=int, default=10)
+    parser.add_argument('-e', '--epochs', type=int, default=20)
     parser.add_argument('--num_layers', type=int, default=3)
     parser.add_argument('--hidden_size', type=int, default=128)
     parser.add_argument('--weight_decay', type=float, default=0)
@@ -138,7 +138,7 @@ def main():
     cfg = wandb.config
     
     # reuse train logic but wandb already initialized
-    epochs = cfg.get('epochs', 10)
+    epochs = cfg.get('epochs', 20)  # bumped from 10 after sweep analysis
     num_layers = cfg.get('num_layers', 3)
     hidden_size = cfg.get('hidden_size', 128)
     weight_decay = cfg.get('weight_decay', 0)

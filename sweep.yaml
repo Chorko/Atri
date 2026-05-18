@@ -6,7 +6,7 @@ metric:
   goal: maximize
 parameters:
   epochs:
-    values: [5, 10]
+    values: [5, 10, 15, 20]
   num_layers:
     values: [3, 4, 5]
   hidden_size:
